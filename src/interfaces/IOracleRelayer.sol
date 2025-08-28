@@ -45,6 +45,11 @@ interface IOracleRelayer {
     error IOracleRelayer_NoWrapperFound();
 
     /**
+     * @notice Thrown when invalid tokenIn input
+     */
+    error IOracleRelayer_InvalidToken();
+
+    /**
      * @notice Gets the amount of output tokens for a given input
      * @dev Routes to the appropriate wrapper based on priority: pair > token > default
      * @param _tokenIn Address of the input token
@@ -95,7 +100,10 @@ interface IOracleRelayer {
      * @param _tokenB Second token in the pair
      * @return _wrapper Address of the wrapper for this pair, or address(0) if none set
      */
-    function getPairWrapper(address _tokenA, address _tokenB) external view returns (address _wrapper);
+    function getPairWrapper(
+        address _tokenA, 
+        address _tokenB
+    ) external view returns (address _wrapper);
     
     /**
      * @notice Gets the configured wrapper for a specific token
